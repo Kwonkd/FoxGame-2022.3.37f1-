@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Dynamic : MonoBehaviour
 {
+    public float JumpPower;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,11 @@ public class Dynamic : MonoBehaviour
         {
             transform.position += Vector3.left * Time.deltaTime;
             Debug.Log("왼쪽 이동");
+        }
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
+            Debug.Log("점프");
         }
     }
 }
