@@ -10,7 +10,7 @@ public class Dynamic : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -30,6 +30,20 @@ public class Dynamic : MonoBehaviour
         {
             GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
             Debug.Log("มกวม");
+        }
+    }
+    private void OnGUI()
+    {
+        GUI.Box(new Rect(0, 0, 100, 20), $"Score:{Score}");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
+        if (collision.collider.name == "cherry")
+        {
+            Score++;
+            Destroy(collision.gameObject);
         }
     }
 }
