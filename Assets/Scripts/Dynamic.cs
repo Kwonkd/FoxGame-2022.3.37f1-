@@ -23,12 +23,13 @@ public class Dynamic : MonoBehaviour
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         if (IsCrouching == true)
         {
-
             collider.radius = CrouchingColliderRadius;
+            Speed = 5;
         }
         else
         {
             collider.radius = ColliderRadius;
+            Speed = 10;
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
