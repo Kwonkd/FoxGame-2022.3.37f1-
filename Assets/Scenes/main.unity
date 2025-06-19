@@ -224,6 +224,9 @@ MonoBehaviour:
   JumpPower: 400
   Speed: 10
   Score: 0
+  IsCrouching: 0
+  ColliderRadius: 0.45
+  CrouchingColliderRadius: 0.3
 --- !u!50 &15441044
 Rigidbody2D:
   serializedVersion: 4

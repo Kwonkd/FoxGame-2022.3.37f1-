@@ -7,16 +7,30 @@ public class Dynamic : MonoBehaviour
     public float JumpPower;
     public float Speed;
     public int Score;
+    public bool IsCrouching;
+    public float ColliderRadius = 0.45f;
+    public float CrouchingColliderRadius = 0.3f;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        IsCrouching = false;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.RightArrow))
+        CircleCollider2D collider = GetComponent<CircleCollider2D>();
+        if (IsCrouching == true)
+        {
+
+            collider.radius = CrouchingColliderRadius;
+        }
+        else
+        {
+            collider.radius = ColliderRadius;
+        }
+        if (Input.GetKey(KeyCode.RightArrow))
         {
             transform.position += Vector3.right * Speed * Time.deltaTime;
             Debug.Log("오른쪽 이동");
@@ -26,10 +40,19 @@ public class Dynamic : MonoBehaviour
             transform.position += Vector3.left * Speed * Time.deltaTime;
             Debug.Log("왼쪽 이동");
         }
-        if(Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A))
         {
             GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
             Debug.Log("점프");
+        }
+        if(Input.GetKey(KeyCode.S))
+        {
+            IsCrouching = true;
+            Debug.Log("IsCrouching = true");
+        }
+        else
+        {
+            IsCrouching = false;
         }
     }
     private void OnGUI()
