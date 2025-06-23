@@ -8,12 +8,13 @@ public class Dynamic : MonoBehaviour
     public float Speed;
     public int Score;
     public bool IsCrouching;
-    public float ColliderRadius = 0.45f;
-    public float CrouchingColliderRadius = 0.3f;
+    public float ColliderRadius = 0.6f;
+    public float CrouchingColliderRadius = 0.4f;
 
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("Dynamic script started.");
         IsCrouching = false;
     }
 
@@ -61,23 +62,23 @@ public class Dynamic : MonoBehaviour
         GUI.Box(new Rect(0, 0, 100, 20), $"Score:{Score}");
     }
 
-  /*private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
-        if (collision.gameObject.name == "cherry")
-        {
-            Score++;
-            Destroy(collision.gameObject);
-        }
-    }*/
+  //private void OnCollisionEnter2D(Collision2D collision)
+  //  {
+  //      Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
+  //      if (collision.gameObject.name == "cherry")
+  //      {
+  //          Score++;
+  //          Destroy(collision.gameObject);
+  //      }
+  //  }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log($"OnTriggerEnter@d:{collision.gameObject.tag}");
-        if (collision.gameObject.tag == "Item")
-        {
-            Score++;
-            Destroy(collision.gameObject);
-        }
-    }
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    Debug.Log($"OnTriggerEnter@d:{collision.gameObject.tag}");
+    //    if (collision.gameObject.tag == "Item")
+    //    {
+    //        Score++;
+    //        Destroy(collision.gameObject);
+    //    }
+    //}
 }
