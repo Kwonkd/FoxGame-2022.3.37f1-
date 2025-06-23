@@ -42,7 +42,7 @@ public class Dynamic : MonoBehaviour
             transform.position += Vector3.left * Speed * Time.deltaTime;
             Debug.Log("왼쪽 이동");
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.A) && IsCrouching == false)
         {
             GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
             Debug.Log("점프");
