@@ -61,10 +61,20 @@ public class Dynamic : MonoBehaviour
         GUI.Box(new Rect(0, 0, 100, 20), $"Score:{Score}");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+  /*private void OnCollisionEnter2D(Collision2D collision)
     {
         Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
-        if (collision.collider.name == "cherry")
+        if (collision.gameObject.name == "cherry")
+        {
+            Score++;
+            Destroy(collision.gameObject);
+        }
+    }*/
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log($"OnTriggerEnter@d:{collision.gameObject.tag}");
+        if (collision.gameObject.tag == "Item")
         {
             Score++;
             Destroy(collision.gameObject);
