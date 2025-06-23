@@ -10,6 +10,7 @@ public class Dynamic : MonoBehaviour
     public bool IsCrouching;
     public float ColliderRadius = 0.6f;
     public float CrouchingColliderRadius = 0.4f;
+    public int jumpCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -44,10 +45,14 @@ public class Dynamic : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.A) && IsCrouching == false)
         {
-            GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
-            Debug.Log("점프");
+            if(jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록
+            { 
+                GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
+                jumpCount++; //점프 카운트 증가
+                Debug.Log("점프");
+            }
         }
-        if(Input.GetKey(KeyCode.S))
+        if(Input.GetKey(KeyCode.S) && jumpCount == 0) // 점프 카운트가 0일 때만 엎드리기 사용 가능 // 점프 중 엎드리기 불가
         {
             IsCrouching = true;
             Debug.Log("IsCrouching = true");
@@ -62,15 +67,22 @@ public class Dynamic : MonoBehaviour
         GUI.Box(new Rect(0, 0, 100, 20), $"Score:{Score}");
     }
 
-  //private void OnCollisionEnter2D(Collision2D collision)
-  //  {
-  //      Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
-  //      if (collision.gameObject.name == "cherry")
-  //      {
-  //          Score++;
-  //          Destroy(collision.gameObject);
-  //      }
-  //  }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Ground")
+        {
+            jumpCount = 0;
+        }
+    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //  {
+    //      Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
+    //      if (collision.gameObject.name == "cherry")
+    //      {
+    //          Score++;
+    //          Destroy(collision.gameObject);
+    //      }
+    //  }
 
     //private void OnTriggerEnter2D(Collider2D collision)
     //{
