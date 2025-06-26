@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Opossum : MonoBehaviour
 {
-    public float speed;
+    public float Speed;
+    public bool isMove = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,7 +15,10 @@ public class Opossum : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        if (isMove)
+        {
+            transform.Translate(Vector3.left * Speed * Time.deltaTime);
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {

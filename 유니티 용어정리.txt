@@ -71,3 +71,12 @@ Message: 상대방에게 전달해서 변화하게 하는 것.
 
 객체지향
 enum
+상태
+행동
+Invoke
+Coroutine
+타이머
+유니티이벤트
+유한상태머신
+magnitude
+트리거
