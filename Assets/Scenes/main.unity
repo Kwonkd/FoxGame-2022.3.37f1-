@@ -1437,6 +1437,8 @@ MonoBehaviour:
   objTarget: {fileID: 0}
   Speed: 2
   EaglePosition: {fileID: 465241990}
+  curTime: -1
+  MaxTime: 2
 --- !u!212 &973351087
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1573,7 +1575,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: -0.0097231865, y: -0.18608904}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 6
 --- !u!1 &977708464
 GameObject:
   m_ObjectHideFlags: 0

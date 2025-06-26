@@ -8,6 +8,9 @@ public class Eagle : MonoBehaviour
     public GameObject objTarget;
     public float Speed = 2;
     public GameObject EaglePosition;
+
+    public float curTime = -1;
+    public float MaxTime = 2;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,29 @@ public class Eagle : MonoBehaviour
                 transform.position += vDir * Speed * Time.deltaTime;
             }
         }
+
+        if (objTarget == null)
+        {
+            if (curTime >= 0)
+            {
+                if (curTime < MaxTime)
+                {
+                    curTime += Time.deltaTime;
+                }
+                else
+                {
+                    objTarget = EaglePosition;
+                    curTime = -1;
+                }
+            }
+            else
+            {
+                if (objTarget == null)
+                {
+                    curTime = 0;
+                }
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -40,9 +66,16 @@ public class Eagle : MonoBehaviour
         {
             objTarget = collision.gameObject;
         }
-        else
+        //else
+        //{
+        //    objTarget = EaglePosition; //충돌한 오브젝트가 플레이어가 아닐때 원위치 // 플레이어가 아닌 다른 오브젝트에 닿아야만 제자리로 돌아감 // 원하는 동작은 아님.
+        //}
+    }
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
         {
-            objTarget = EaglePosition; //충돌한 오브젝트가 플레이어가 아닐때 원위치 // 플레이어가 아닌 다른 오브젝트에 닿아야만 제자리로 돌아감 // 원하는 동작은 아님.
+            objTarget = null;
         }
     }
     private void OnCollisionEnter2D(Collision2D collision)
