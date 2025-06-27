@@ -26,7 +26,7 @@ public class EagleResponer : MonoBehaviour
             else
             {
                 Eagle = Instantiate(prefab_Eagle, transform.position, Quaternion.identity);
-                Eagle.GetComponent<Eagle>().EaglePosition = this.gameObject;
+                //Eagle.GetComponent<Eagle>().EaglePosition = this.gameObject;
                 curTime = -1;
             }
         }
