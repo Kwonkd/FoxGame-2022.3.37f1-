@@ -5,9 +5,9 @@ using UnityEngine;
 public class EagleResponer : MonoBehaviour
 {
     public float curTime = -1;
-    public float MaxTime;
-    public GameObject player;
-    public GameObject prefab_player;
+    public float MaxTime = 1;
+    public GameObject Eagle;
+    public GameObject prefab_Eagle;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +25,14 @@ public class EagleResponer : MonoBehaviour
             }
             else
             {
-                player = Instantiate(prefab_player, transform.position, Quaternion.identity);
+                Eagle = Instantiate(prefab_Eagle, transform.position, Quaternion.identity);
+                Eagle.GetComponent<Eagle>().EaglePosition = this.gameObject;
                 curTime = -1;
             }
         }
         else
         {
-            if (player == null)
+            if (Eagle == null)
             {
                 curTime = 0;
             }

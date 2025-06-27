@@ -316,7 +316,7 @@ Transform:
   m_GameObject: {fileID: 465241990}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 15.9, y: 2.87, z: -8.73409}
+  m_LocalPosition: {x: 15, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -335,9 +335,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   curTime: -1
-  MaxTime: 0
-  player: {fileID: 973351085}
-  prefab_player: {fileID: 5456463150860572597, guid: 60b92c98e076bd049953497c17de1279, type: 3}
+  MaxTime: 1
+  Eagle: {fileID: 973351085}
+  prefab_Eagle: {fileID: 5456463150860572597, guid: 60b92c98e076bd049953497c17de1279, type: 3}
 --- !u!1 &730558107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,11 +2059,11 @@ PrefabInstance:
       objectReference: {fileID: 465241990}
     - target: {fileID: 9116157945407471345, guid: 60b92c98e076bd049953497c17de1279, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.043087
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9116157945407471345, guid: 60b92c98e076bd049953497c17de1279, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2471406
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9116157945407471345, guid: 60b92c98e076bd049953497c17de1279, type: 3}
       propertyPath: m_LocalPosition.z
