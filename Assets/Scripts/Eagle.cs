@@ -65,6 +65,10 @@ public class Eagle : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             objTarget = collision.gameObject;
+            if (curTime > -1)
+            {
+                curTime -= 0.5f * Time.deltaTime;
+            }
         }
         //else
         //{
