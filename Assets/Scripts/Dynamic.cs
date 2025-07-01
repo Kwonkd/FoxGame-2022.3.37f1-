@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Dynamic : MonoBehaviour
 {
@@ -11,6 +12,20 @@ public class Dynamic : MonoBehaviour
     public float ColliderRadius = 0.6f;
     public float CrouchingColliderRadius = 0.4f;
     public int jumpCount = 0;
+    public float LineSize;
+
+    void Raycast()
+    {
+        Vector3 rayTransform = new Vector3(transform.position.x, transform.position.y - 0.45f, transform.position.z);
+        Debug.DrawRay(rayTransform, transform.forward + Vector3.up * LineSize, Color.yellow);
+        LayerMask player = LayerMask.GetMask("Player");
+
+        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up, ~LayerMask.GetMask("Player"));
+        if (Raycast)
+        {
+            Debug.Log($"Raycast Hit: {Raycast.collider.gameObject.name}");
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +37,7 @@ public class Dynamic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Raycast();
         CircleCollider2D collider = GetComponent<CircleCollider2D>();
         if (IsCrouching == true)
         {
