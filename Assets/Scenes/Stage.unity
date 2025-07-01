@@ -2081,9 +2081,21 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 1329726685635336216, guid: 541b8201748df12458887b6ceb808383, type: 3}
+      propertyPath: m_Radius
+      value: 0.45
+      objectReference: {fileID: 0}
     - target: {fileID: 2642884218688676113, guid: 541b8201748df12458887b6ceb808383, type: 3}
       propertyPath: LineSize
-      value: 0.45
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642884218688676113, guid: 541b8201748df12458887b6ceb808383, type: 3}
+      propertyPath: player.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 2963600546517848086, guid: 541b8201748df12458887b6ceb808383, type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4462438931008630061, guid: 541b8201748df12458887b6ceb808383, type: 3}
       propertyPath: m_Layer
