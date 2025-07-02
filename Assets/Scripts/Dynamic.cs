@@ -20,11 +20,10 @@ public class Dynamic : MonoBehaviour
         Debug.DrawRay(rayTransform, transform.forward + Vector3.up * LineSize, Color.blue);
         LayerMask player = LayerMask.GetMask("Player");
 
-        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up, player); //레이캐스트를 플레이어 머리 위로 //레이캐스트가 플레이어를 무시하도록
-        if (Raycast)
+        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up); //레이캐스트를 플레이어 머리 위로 //레이캐스트가 플레이어를 무시하도록
+        if (Raycast && IsCrouching)
         {
             Debug.Log($"Raycast Hit: {Raycast.collider.gameObject.name}");
-            IsCrouching = true;
             return true;
         }
         else
