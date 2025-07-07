@@ -2090,6 +2090,10 @@ PrefabInstance:
       value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 2642884218688676113, guid: 541b8201748df12458887b6ceb808383, type: 3}
+      propertyPath: JumpPower
+      value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 2642884218688676113, guid: 541b8201748df12458887b6ceb808383, type: 3}
       propertyPath: player.m_Bits
       value: 128
       objectReference: {fileID: 0}

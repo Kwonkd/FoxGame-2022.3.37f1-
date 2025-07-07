@@ -86,3 +86,6 @@ Coroutine
 유한상태머신
 magnitude
 트리거
+foreach
+System.Serializable
+ForceMode2D.Impulse

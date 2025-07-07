@@ -14,6 +14,11 @@ public class Dynamic : MonoBehaviour
     public int jumpCount = 0;
     public float LineSize;
 
+    private Rigidbody2D rb;
+
+    public float FallingGravityMultiplier = 2.0f;
+    private float originalGravityScale = 1.0f;
+
     bool RaycastCrouching()
     {
         Vector3 rayTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 레이캐스트 위치를 플레이어의 위치로 설정 //위치 수정을 위해 따로 정의함
@@ -33,16 +38,19 @@ public class Dynamic : MonoBehaviour
     }
     void movePlayer()
     {
+        float MoveInput = 0f;
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            transform.position += Vector3.right * Speed * Time.deltaTime;
+            MoveInput = 1f;
             Debug.Log("오른쪽 이동");
         }
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            transform.position += Vector3.left * Speed * Time.deltaTime;
+            MoveInput = -1f;
             Debug.Log("왼쪽 이동");
         }
+
+        transform.position += Vector3.right * MoveInput * Speed * Time.deltaTime;
     }
     void Crouching()
     {
@@ -78,19 +86,53 @@ public class Dynamic : MonoBehaviour
         {
             if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록
             {
-                GetComponent<Rigidbody2D>().AddForce(Vector3.up * JumpPower);
+                rb.AddForce(Vector2.up * JumpPower);
+                float horizonInput = 0f;
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    horizonInput = 1f; //오른쪽 이동
+                }
+                else if (Input.GetKey(KeyCode.LeftArrow))
+                {
+                    horizonInput = -1f; //왼쪽 이동
+                }
+
+                if(horizonInput != 0f)
+                {
+                    rb.AddForce(Vector2.right * horizonInput * JumpPower * 0.01f,ForceMode2D.Impulse); //수평 이동
+                }
                 jumpCount++; //점프 카운트 증가
                 Debug.Log("점프");
             }
         }
     }
-
-
+    void AdjustJumpGravity()
+    {
+        // 캐릭터가 상승 중일 때 (y축 속도가 양수)
+        if (rb.velocity.y > 0 && !Input.GetKey(KeyCode.A)) // 점프 키를 누르지 않고 상승 중
+        {
+            // 중력을 원래대로 유지하거나 약간 낮게 유지 (옵션)
+            rb.gravityScale = originalGravityScale;
+        }
+        // 캐릭터가 하강 중일 때 (y축 속도가 음수)
+        else if (rb.velocity.y < 0)
+        {
+            // 떨어질 때 중력을 더 강하게 적용
+            rb.gravityScale = originalGravityScale * FallingGravityMultiplier;
+        }
+        // 땅에 있거나 점프 시작 직후 (y축 속도가 0에 가깝거나 점프 키를 누른 상태)
+        else
+        {
+            rb.gravityScale = originalGravityScale; // 기본 중력으로 돌아감
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Dynamic script started.");
         IsCrouching = false;
+        
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -101,6 +143,7 @@ public class Dynamic : MonoBehaviour
         Jump();
         Crouching();
     }
+
     private void OnGUI()
     {
         GUI.Box(new Rect(0, 0, 100, 20), $"Score:{Score}");
