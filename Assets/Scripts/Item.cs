@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    public int Score;
+    public int number;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Dynamic>().Score += Score;
+            collision.gameObject.GetComponent<Dynamic>().Number += number;
             Destroy(gameObject);
         }
     }

@@ -7,12 +7,14 @@ public class Dynamic : MonoBehaviour
 {
     public float JumpPower;
     public float Speed;
-    public int Score;
+    public int Number;
     public bool IsCrouching;
     public float ColliderRadius = 0.6f;
     public float CrouchingColliderRadius = 0.4f;
     public int jumpCount = 0;
-    public float LineSize;
+    public float LineSize = 0.15f;
+    public float Groundlinesize = 0.42f;
+    public bool IsGrounded;
 
     private Rigidbody2D rb;
 
@@ -23,9 +25,8 @@ public class Dynamic : MonoBehaviour
     {
         Vector3 rayTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 레이캐스트 위치를 플레이어의 위치로 설정 //위치 수정을 위해 따로 정의함
         Debug.DrawRay(rayTransform, transform.forward + Vector3.up * LineSize, Color.blue);
-        LayerMask player = LayerMask.GetMask("Player");
 
-        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up); //레이캐스트를 플레이어 머리 위로 //레이캐스트가 플레이어를 무시하도록
+        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up); //레이캐스트를 플레이어 머리 위로
         if (Raycast && IsCrouching)
         {
             Debug.Log($"Raycast Hit: {Raycast.collider.gameObject.name}");
@@ -36,6 +37,24 @@ public class Dynamic : MonoBehaviour
             return false;
         }
     }
+    void RaycastGround() //플레이어 캐릭터가 바닥에 닿은 상태인지 확인하기 위한 레이캐스트
+    {
+        Vector3 rayTransform = new Vector3(transform.position.x, transform.position.y-0.45f, transform.position.z); // 레이캐스트 위치를 플레이어의 위치로 설정 //위치 수정을 위해 따로 정의함
+        Debug.DrawRay(rayTransform, transform.forward + Vector3.down * Groundlinesize, Color.red);
+
+        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, Vector3.down, Groundlinesize, ~LayerMask.GetMask("Player")); //레이캐스트를 플레이어 아래로 //레이캐스트가 플레이어를 무시하도록
+        if (Raycast)
+        {
+            jumpCount = 0; //바닥에 닿은 상태기 때문에 점프 카운트를 0으로 초기화
+            Debug.Log($"GroundRaycast Hit: {Raycast.collider.gameObject.name}");
+            IsGrounded = true; //바닥에 닿은 상태
+        }
+        else
+        {
+            IsGrounded = false; //바닥에 닿지 않은 상태
+        }
+    }
+
     void movePlayer()
     {
         float MoveInput = 0f;
@@ -84,7 +103,7 @@ public class Dynamic : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A) && IsCrouching == false)
         {
-            if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록
+            if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록 제한.
             {
                 rb.AddForce(Vector2.up * JumpPower);
                 float horizonInput = 0f;
@@ -131,8 +150,10 @@ public class Dynamic : MonoBehaviour
     {
         Debug.Log("Dynamic script started.");
         IsCrouching = false;
-        
+        IsGrounded = true;
+
         rb = GetComponent<Rigidbody2D>();
+
     }
 
     // Update is called once per frame
@@ -142,19 +163,20 @@ public class Dynamic : MonoBehaviour
         movePlayer();
         Jump();
         Crouching();
+        RaycastGround();
     }
 
     private void OnGUI()
     {
-        GUI.Box(new Rect(0, 0, 100, 20), $"Score:{Score}");
+        GUI.Box(new Rect(0, 0, 200, 20), $"Number of Cherries:{Number}");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
-        {
-            jumpCount = 0;
-        }
+        //if(collision.gameObject.tag == "Ground")
+        //{
+        //    jumpCount = 0;
+        //}
     }
     //private void OnCollisionEnter2D(Collision2D collision)
     //  {
