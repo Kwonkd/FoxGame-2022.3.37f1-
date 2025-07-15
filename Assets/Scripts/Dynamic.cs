@@ -45,9 +45,9 @@ public class Dynamic : MonoBehaviour
         RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, Vector3.down, Groundlinesize, ~LayerMask.GetMask("Player")); //레이캐스트를 플레이어 아래로 //레이캐스트가 플레이어를 무시하도록
         if (Raycast)
         {
-            jumpCount = 0; //바닥에 닿은 상태기 때문에 점프 카운트를 0으로 초기화
             Debug.Log($"GroundRaycast Hit: {Raycast.collider.gameObject.name}");
             IsGrounded = true; //바닥에 닿은 상태
+            jumpCount = 0; //바닥에 닿은 상태기 때문에 점프 카운트 초기화
         }
         else
         {
@@ -105,6 +105,7 @@ public class Dynamic : MonoBehaviour
         {
             if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록 제한.
             {
+                jumpCount++; //점프 카운트 증가
                 rb.AddForce(Vector2.up * JumpPower);
                 float horizonInput = 0f;
                 if (Input.GetKey(KeyCode.RightArrow))
@@ -118,9 +119,8 @@ public class Dynamic : MonoBehaviour
 
                 if(horizonInput != 0f)
                 {
-                    rb.AddForce(Vector2.right * horizonInput * JumpPower * 0.01f,ForceMode2D.Impulse); //수평 이동
+                    rb.AddForce(Vector3.right * horizonInput * JumpPower * 0.01f,ForceMode2D.Impulse); //수평 이동
                 }
-                jumpCount++; //점프 카운트 증가
                 Debug.Log("점프");
             }
         }
@@ -171,13 +171,14 @@ public class Dynamic : MonoBehaviour
         GUI.Box(new Rect(0, 0, 200, 20), $"Number of Cherries:{Number}");
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //if(collision.gameObject.tag == "Ground")
-        //{
-        //    jumpCount = 0;
-        //}
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if(collision.gameObject.tag == "Ground")
+    //    {
+    //        jumpCount = 0;
+    //    }
+    //}
+
     //private void OnCollisionEnter2D(Collision2D collision)
     //  {
     //      Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
