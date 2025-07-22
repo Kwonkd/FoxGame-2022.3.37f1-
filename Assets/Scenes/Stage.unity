@@ -1913,6 +1913,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 4462438931008630061, guid: 541b8201748df12458887b6ceb808383, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5862482318307211213, guid: 541b8201748df12458887b6ceb808383, type: 3}
       propertyPath: Bullet
       value: 
@@ -2148,6 +2152,10 @@ PrefabInstance:
       propertyPath: EaglePosition
       value: 
       objectReference: {fileID: 465241990}
+    - target: {fileID: 7127389359312491014, guid: 60b92c98e076bd049953497c17de1279, type: 3}
+      propertyPath: spriteRenderer
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 9116157945407471345, guid: 60b92c98e076bd049953497c17de1279, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15

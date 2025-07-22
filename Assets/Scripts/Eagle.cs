@@ -27,7 +27,6 @@ public class Eagle : MonoBehaviour
             Vector3 vDist = vTargetPos - vPos;
             Vector3 vDir = vDist.normalized;
             float fDist = vDist.magnitude;
-
             //   Debug.DrawLine(vPos, vTargetPos, Color.red);
 
             if (fDist > Time.deltaTime)

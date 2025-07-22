@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2642884218688676113}
   - component: {fileID: 1329726685635336216}
   - component: {fileID: 6236886233129257237}
+  - component: {fileID: 4111495542922119716}
   m_Layer: 0
   m_Name: Prefab_Player_Gun
   m_TagString: Player
@@ -102,11 +103,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   JumpPower: 400
   Speed: 10
-  Score: 0
+  Number: 0
   IsCrouching: 0
   ColliderRadius: 0.45
   CrouchingColliderRadius: 0.3
   jumpCount: 0
+  LineSize: 0.15
+  Groundlinesize: 0.42
+  IsGrounded: 0
+  FallingGravityMultiplier: 2
+  animator: {fileID: 4111495542922119716}
 --- !u!58 &1329726685635336216
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -169,6 +175,27 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!95 &4111495542922119716
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1047730651502157964}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c9ee9f9a0dd397c46a41343928afd6df, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4462438931008630061
 GameObject:
   m_ObjectHideFlags: 0
