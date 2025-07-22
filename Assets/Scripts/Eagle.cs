@@ -20,6 +20,8 @@ public class Eagle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        MoveDirectrion();
+
         if (objTarget != null)
         {
             Vector3 vPos = this.transform.position;
@@ -86,6 +88,23 @@ public class Eagle : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         { 
         Destroy(collision.gameObject);
+        }
+    }
+    void MoveDirectrion() //독수리가 바라보는 방향을 변경
+    {
+        if (objTarget != null)
+        {
+            float currentX = transform.position.x; //독수리의 현재 x좌표
+            float targetX = objTarget.transform.position.x; //독수리의 타겟의 x좌표
+            float moveX = currentX - targetX;
+            if(moveX > 0) // 타겟이 독수리보다 왼쪽에 위치
+            {
+                GetComponent<SpriteRenderer>().flipX = false;
+            }
+            else if (moveX < 0) // 타겟이 독수링보다 오른쪽에 위치
+            {
+                GetComponent<SpriteRenderer>().flipX = true;
+            }
         }
     }
 }
