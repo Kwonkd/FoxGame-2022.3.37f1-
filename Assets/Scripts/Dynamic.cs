@@ -21,6 +21,8 @@ public class Dynamic : MonoBehaviour
     public float FallingGravityMultiplier = 2.0f;
     private float originalGravityScale = 1.0f;
 
+    public Animator animator;
+
     bool RaycastCrouching()
     {
         Vector3 rayTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 레이캐스트 위치를 플레이어의 위치로 설정 //위치 수정을 위해 따로 정의함
@@ -62,24 +64,32 @@ public class Dynamic : MonoBehaviour
         {
             MoveInput = 1f;
             Debug.Log("오른쪽 이동");
+            animator.SetBool("Run", true);
         }
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
             MoveInput = -1f;
             Debug.Log("왼쪽 이동");
+            animator.SetBool("Run", true);
         }
-
-        transform.position += Vector3.right * MoveInput * Speed * Time.deltaTime;
+        else
+        {
+            MoveInput = 0f;
+            animator.SetBool("Run", false); 
+        }
+            transform.position += Vector3.right * MoveInput * Speed * Time.deltaTime;
     }
     void Crouching()
     {
         if (Input.GetKey(KeyCode.S) && jumpCount == 0 || RaycastCrouching()) // 점프 카운트가 0일 때만 엎드리기 사용 가능 // 점프 중 엎드리기 불가
         {
             IsCrouching = true;
+            animator.SetBool("Crouch", true);
             Debug.Log("IsCrouching = true");
         }
         else
         {
+            animator.SetBool("Crouch", false);
             IsCrouching = false;
         }
     }
