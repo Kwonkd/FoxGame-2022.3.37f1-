@@ -63,12 +63,14 @@ public class Dynamic : MonoBehaviour
         if (Input.GetKey(KeyCode.RightArrow))
         {
             MoveInput = 1f;
+            GetComponent<SpriteRenderer>().flipX = false;
             Debug.Log("오른쪽 이동");
             animator.SetBool("Run", true);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             MoveInput = -1f;
+            GetComponent<SpriteRenderer>().flipX = true;
             Debug.Log("왼쪽 이동");
             animator.SetBool("Run", true);
         }
@@ -125,6 +127,7 @@ public class Dynamic : MonoBehaviour
                 else if (Input.GetKey(KeyCode.LeftArrow))
                 {
                     horizonInput = -1f; //왼쪽 이동
+                    
                 }
 
                 if(horizonInput != 0f)
