@@ -71,12 +71,12 @@ public class Frog : MonoBehaviour
         isJumpping = false;
         isJump = false;
         isMove = false;
-        Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
+        //Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         isGound = false;
-        Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
+        //Debug.Log($"OnCollisionEnter2D:{collision.gameObject.name}");
     }
 }

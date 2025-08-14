@@ -31,7 +31,7 @@ public class Dynamic : MonoBehaviour
         RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up); //레이캐스트를 플레이어 머리 위로
         if (Raycast && IsCrouching)
         {
-            Debug.Log($"Raycast Hit: {Raycast.collider.gameObject.name}");
+            //Debug.Log($"Raycast Hit: {Raycast.collider.gameObject.name}");
             return true;
         }
         else
@@ -47,7 +47,7 @@ public class Dynamic : MonoBehaviour
         RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, Vector3.down, Groundlinesize, ~LayerMask.GetMask("Player")); //레이캐스트를 플레이어 아래로 //레이캐스트가 플레이어를 무시하도록
         if (Raycast)
         {
-            Debug.Log($"GroundRaycast Hit: {Raycast.collider.gameObject.name}");
+            //Debug.Log($"GroundRaycast Hit: {Raycast.collider.gameObject.name}");
             IsGrounded = true; //바닥에 닿은 상태
             jumpCount = 0; //바닥에 닿은 상태기 때문에 점프 카운트 초기화
         }
@@ -64,14 +64,14 @@ public class Dynamic : MonoBehaviour
         {
             MoveInput = 1f;
             GetComponent<SpriteRenderer>().flipX = false;
-            Debug.Log("오른쪽 이동");
+            //Debug.Log("오른쪽 이동");
             animator.SetBool("Run", true);
         }
         else if (Input.GetKey(KeyCode.LeftArrow))
         {
             MoveInput = -1f;
             GetComponent<SpriteRenderer>().flipX = true;
-            Debug.Log("왼쪽 이동");
+            //Debug.Log("왼쪽 이동");
             animator.SetBool("Run", true);
         }
         else
@@ -134,7 +134,7 @@ public class Dynamic : MonoBehaviour
                 {
                     rb.AddForce(Vector3.right * horizonInput * JumpPower * 0.01f,ForceMode2D.Impulse); //수평 이동
                 }
-                Debug.Log("점프");
+                //Debug.Log("점프");
             }
         }
     }
@@ -177,6 +177,7 @@ public class Dynamic : MonoBehaviour
         Jump();
         Crouching();
         RaycastGround();
+        AdjustJumpGravity();
     }
 
     private void OnGUI()
