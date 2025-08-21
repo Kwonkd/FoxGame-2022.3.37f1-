@@ -26,9 +26,9 @@ public class Dynamic : MonoBehaviour
     bool RaycastCrouching()
     {
         Vector3 rayTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z); // 레이캐스트 위치를 플레이어의 위치로 설정 //위치 수정을 위해 따로 정의함
-        Debug.DrawRay(rayTransform, transform.forward + Vector3.up * LineSize, Color.blue);
+        //Debug.DrawRay(rayTransform, transform.forward + Vector3.up * LineSize, Color.blue);
 
-        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform, transform.up); //레이캐스트를 플레이어 머리 위로
+        RaycastHit2D Raycast = Physics2D.Raycast(rayTransform,Vector3.up,LineSize,~LayerMask.GetMask("Player")); //레이캐스트를 플레이어 머리 위로
         if (Raycast && IsCrouching)
         {
             //Debug.Log($"Raycast Hit: {Raycast.collider.gameObject.name}");
@@ -50,6 +50,8 @@ public class Dynamic : MonoBehaviour
             //Debug.Log($"GroundRaycast Hit: {Raycast.collider.gameObject.name}");
             IsGrounded = true; //바닥에 닿은 상태
             jumpCount = 0; //바닥에 닿은 상태기 때문에 점프 카운트 초기화
+            animator.SetBool("Jump", false);
+            animator.SetBool("Fall", false);
         }
         else
         {
@@ -145,12 +147,14 @@ public class Dynamic : MonoBehaviour
         {
             // 중력을 원래대로 유지하거나 약간 낮게 유지 (옵션)
             rb.gravityScale = originalGravityScale;
+            animator.SetBool("Jump", true);
         }
         // 캐릭터가 하강 중일 때 (y축 속도가 음수)
         else if (rb.velocity.y < 0)
         {
             // 떨어질 때 중력을 더 강하게 적용
             rb.gravityScale = originalGravityScale * FallingGravityMultiplier;
+            animator.SetBool("Fall", true);
         }
         // 땅에 있거나 점프 시작 직후 (y축 속도가 0에 가깝거나 점프 키를 누른 상태)
         else
