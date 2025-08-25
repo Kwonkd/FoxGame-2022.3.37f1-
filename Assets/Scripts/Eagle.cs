@@ -11,11 +11,6 @@ public class Eagle : MonoBehaviour
 
     public float curTime = -1;
     public float MaxTime = 2;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
     void Update()
