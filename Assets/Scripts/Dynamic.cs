@@ -119,6 +119,7 @@ public class Dynamic : MonoBehaviour
         {
             if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록 제한.
             {
+                IsGrounded = false; //점프했으므로 땅에 닿지 않은 상태
                 jumpCount++; //점프 카운트 증가
                 rb.AddForce(Vector2.up * JumpPower);
                 float horizonInput = 0f;
@@ -183,12 +184,6 @@ public class Dynamic : MonoBehaviour
         RaycastGround();
         AdjustJumpGravity();
     }
-
-    private void OnGUI()
-    {
-        GUI.Box(new Rect(0, 0, 200, 20), $"Number of Cherries:{Number}");
-    }
-
     //private void OnCollisionEnter2D(Collision2D collision)
     //{
     //    if(collision.gameObject.tag == "Ground")

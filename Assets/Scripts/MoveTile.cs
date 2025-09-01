@@ -17,6 +17,7 @@ public class MoveTile : MonoBehaviour
     public float moveDistance = 5.0f;
     public float elapsedTime = 0.0f;
     public float positionY;
+    public float moveSpeed = 1.0f;
 
     void Start()
     {
@@ -32,19 +33,19 @@ public class MoveTile : MonoBehaviour
                 elapsedTime += Time.deltaTime;
                 if(elapsedTime >= waitTime)
                 {
-                    if(positionY > tilemap.transform.position.y)
+                    if(positionY < tilemap.transform.position.y)
                     {
-                        moveType = MoveType.Up;
+                        moveType = MoveType.Down;
                     }
                     else
                     {
-                        moveType = MoveType.Down;
+                        moveType = MoveType.Up;
                     }
                 }
                 break;
 
             case MoveType.Up:
-                if(tilemap.transform.position.y <= positionY)
+                if(tilemap.transform.position.y <= positionY + moveDistance)
                 {
                     elapsedTime = 0.0f;
                     UpMove();
@@ -56,7 +57,7 @@ public class MoveTile : MonoBehaviour
                 break;
 
             case MoveType.Down:
-                if (tilemap.transform.position.y >= positionY - moveDistance)
+                if (tilemap.transform.position.y >= positionY)
                 {
                     elapsedTime = 0.0f;
                     DownMove();
@@ -71,10 +72,10 @@ public class MoveTile : MonoBehaviour
 
     void UpMove()
     {
-            tilemap.transform.position += Vector3.up * Time.deltaTime;
+            tilemap.transform.position += Vector3.up * Time.deltaTime * moveSpeed;
     }
     void DownMove()
     {
-            tilemap.transform.position += Vector3.down * Time.deltaTime;
+            tilemap.transform.position += Vector3.down * Time.deltaTime * moveSpeed;
     }
 }
