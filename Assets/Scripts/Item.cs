@@ -20,7 +20,7 @@ public class Item : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Dynamic>().Number += number;
+            //collision.gameObject.GetComponent<Dynamic>().Number += number;
             Destroy(gameObject);
         }
     }
