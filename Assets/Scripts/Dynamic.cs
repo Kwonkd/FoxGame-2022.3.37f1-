@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Dynamic : MonoBehaviour
 {
-    [Header("Move")]
+    [Header("Common")]
     public float Speed; // 이동 속도
     public float ColliderRadius = 0.6f; // 기본 콜라이더 반지름
     public float NormalSpeed = 10f; // 기본 이동 속도
@@ -48,39 +48,40 @@ public class Dynamic : MonoBehaviour
     void Update()
     {
         CheckState();       // 웅크리기 상태에 따라 속도와 콜라이더 크기 조절
-        movePlayer();       // 플레이어 좌우 이동 처리
         Jump();             // 점프 입력 및 실행
         Crouching();        // 웅크리기 입력 및 실행
         RaycastGround();    // 바닥 감지
+
+    }
+    private void FixedUpdate()
+    {
+        // 물리적인 움직임 처리
+        movePlayer();       // 플레이어 좌우 이동 처리
         AdjustJumpGravity();// 점프/낙하 시 중력 조절
     }
     void movePlayer()
     {
-        float MoveInput = 0f;
-        if (Input.GetKey(KeyCode.RightArrow))
+        // GetKey 대신 GetAxisRaw를 사용하면 더 부드럽고 유연한 입력 처리 (좌: -1, 우: 1, 없음: 0)
+        float moveInput = Input.GetAxisRaw("Horizontal");
+
+        // x축 속도는 입력을 받아 제어하고, y축 속도는 현재 값을 유지 (점프/낙하에 영향 X)
+        rb.velocity = new Vector2(moveInput * Speed, rb.velocity.y);
+
+        if (moveInput != 0)
         {
-            MoveInput = 1f;
-            spriteRenderer.flipX = false; // 오른쪽 볼 때 스프라이트 원상태 복구
-            //Debug.Log("오른쪽 이동");
-            animator.SetBool("Run", true);
-        }
-        else if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            MoveInput = -1f;
-            spriteRenderer.flipX = true; // 왼쪽 볼 때 스프라이트 반전
-            //Debug.Log("왼쪽 이동");
+            // 스프라이트 방향 전환
+            spriteRenderer.flipX = moveInput < 0;
             animator.SetBool("Run", true);
         }
         else
         {
-            MoveInput = 0f;
             animator.SetBool("Run", false);
         }
-        transform.position += Vector3.right * MoveInput * Speed * Time.deltaTime;
     }
+
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.A) && IsCrouching == false) // A키 입력, 엎드린 상태가 아닐 때
+        if (Input.GetKeyDown(KeyCode.Space) && IsCrouching == false) // A키 입력, 엎드린 상태가 아닐 때
         {
             if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록 제한.
             {
@@ -103,23 +104,27 @@ public class Dynamic : MonoBehaviour
         {
             // 떨어질 때 중력을 더 강하게 적용
             rb.gravityScale = originalGravityScale * FallingGravityMultiplier;
+            animator.SetBool("Jump", false);
             animator.SetBool("Fall", true);
         }
         // 땅에 있거나 점프 시작 직후 (y축 속도가 0에 가깝거나 점프 키를 누른 상태)
         else
         {
+            animator.SetBool("Fall", false);
+            animator.SetBool("Jump", false);
             rb.gravityScale = originalGravityScale; // 기본 중력으로 돌아감
         }
     }
     void Crouching()
     {
-        if (Input.GetKey(KeyCode.S) && jumpCount == 0 || RaycastCrouching()) // 점프 카운트가 0일 때만 엎드리기 사용 가능 // 점프 중 엎드리기 불가
+        if (Input.GetKey(KeyCode.S) && jumpCount == 0) // 점프 카운트가 0일 때만 엎드리기 사용 가능 // 점프 중 엎드리기 불가
         {
             IsCrouching = true;
             animator.SetBool("Crouch", true);
             //Debug.Log("IsCrouching = true");
         }
-        else
+        // S키를 떼고, 머리 위에 장애물이 없을 때만 일어서기
+        else if (!Input.GetKey(KeyCode.S) && !RaycastCrouching())
         {
             IsCrouching = false;
             animator.SetBool("Crouch", false);
