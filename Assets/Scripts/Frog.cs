@@ -12,13 +12,6 @@ public class Frog : MonoBehaviour
     public float JumpPower = 300;
     public bool isJumpping = false;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
     public float maxTime = 1; //최대시간
     public float curTime = -1; //현재시간 //센티넬: 음수의 값을 설정해서 비활성화 상태를 만드는것.
 

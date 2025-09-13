@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
     public int maxHp = 5;
     public int currentHp;
+    public int numberOfCherry;
 
     private void Awake()
     {

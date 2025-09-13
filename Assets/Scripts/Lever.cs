@@ -20,7 +20,7 @@ public class Lever : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if(collision.CompareTag("Player") && leverText != null)
         { 
             leverText.text = "Press E Button";
             leverText.gameObject.SetActive(true);

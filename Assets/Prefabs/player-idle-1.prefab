@@ -99,12 +99,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c61b117e6ae4f74cbb682cfd869252b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  JumpPower: 400
   Speed: 10
-  Score: 0
+  ColliderRadius: 0.6
+  NormalSpeed: 10
+  JumpPower: 400
+  IsGrounded: 0
+  Groundlinesize: 0.42
+  jumpCount: 0
   IsCrouching: 0
-  ColliderRadius: 0.45
+  LineSize: 0.15
   CrouchingColliderRadius: 0.3
+  CrouchSpeed: 5
+  FallingGravityMultiplier: 2
+  animator: {fileID: 0}
 --- !u!58 &2709508016288150930
 CircleCollider2D:
   m_ObjectHideFlags: 0
