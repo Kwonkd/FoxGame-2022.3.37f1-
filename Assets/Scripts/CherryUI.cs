@@ -7,10 +7,15 @@ public class CherryUI : MonoBehaviour
 {
     public PlayerStatus ps;
     public TextMeshProUGUI cherryText;
+    public TextMeshProUGUI playerHp;
 
     // Update is called once per frame
     void Update()
     {
-        cherryText.text = "x " + ps.numberOfCherry.ToString();
+        if (playerHp != null)
+        {
+            playerHp.text = ps.currentHp.ToString();
+            cherryText.text = "x " + ps.numberOfCherry.ToString();
+        }
     }
 }
