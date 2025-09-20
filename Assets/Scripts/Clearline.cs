@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class Clearline : MonoBehaviour
 {
-    TimelineControl tc;
+    [SerializeField]
+    private TimelineControl tc;
+
+    private bool isPlay = false;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && isPlay == false)
         {
-            if(tc == null)
+            if(tc != null)
             {
-                tc = FindObjectOfType<TimelineControl>();
-            }
-            else
-            {
+                isPlay = true;
                 tc.StageClear();
             }
         }

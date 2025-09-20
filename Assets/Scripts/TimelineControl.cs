@@ -8,7 +8,7 @@ public class TimelineControl : MonoBehaviour
     public PlayableDirector endDirector;
     private void Awake()
     {
-        endDirector.Pause();
+        //endDirector.Pause();
     }
 
     public void StageClear()

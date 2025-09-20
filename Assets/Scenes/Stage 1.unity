@@ -578,7 +578,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!320 &276435595
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -1972,6 +1972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fffdcaa399904c4a85e533214ae2fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tc: {fileID: 615594525}
 --- !u!4 &949204283 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4045477644114619166, guid: 20fed13321026234c968749b1f0fab2e, type: 3}
