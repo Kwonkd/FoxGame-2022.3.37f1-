@@ -8,8 +8,9 @@ public class Deadzone : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerStatus playerStatus = other.GetComponent<PlayerStatus>();
+            playerStatus.GameOver();
             Debug.Log("Player entered the deadzone!");
-            Destroy(other.gameObject);
         }
     }
 }

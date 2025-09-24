@@ -9,6 +9,8 @@ public class PlayerStatus : MonoBehaviour
     public int currentHp;
     public int numberOfCherry;
 
+
+
     private void Awake()
     {
         currentHp = maxHp;
@@ -16,7 +18,7 @@ public class PlayerStatus : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void TakeDamage(int damage)
@@ -25,5 +27,15 @@ public class PlayerStatus : MonoBehaviour
         {
             currentHp -= damage;
         }
+        if(currentHp <= 0)
+        {
+            GameOver();
+        }
+    }
+
+    public void GameOver()
+    {
+        PauseUI pauseUI = FindObjectOfType<PauseUI>();
+        pauseUI.GameOverUI();
     }
 }

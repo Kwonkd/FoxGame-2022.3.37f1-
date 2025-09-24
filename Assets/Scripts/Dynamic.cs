@@ -5,6 +5,11 @@ using UnityEngine.EventSystems;
 
 public class Dynamic : MonoBehaviour
 {
+    public Animator animator; // 애니메이션 컨트롤러
+    private Rigidbody2D rb;
+    private SpriteRenderer spriteRenderer;
+    private CircleCollider2D circleCollider;
+
     [Header("Common")]
     public float Speed; // 이동 속도
     public float ColliderRadius = 0.6f; // 기본 콜라이더 반지름
@@ -22,14 +27,9 @@ public class Dynamic : MonoBehaviour
     public float CrouchingColliderRadius = 0.4f; // 엎드렸을 때 콜라이더 반지름
     public float CrouchSpeed = 5f; // 엎드렸을 때 이동 속도
 
-    private Rigidbody2D rb;
-    private SpriteRenderer spriteRenderer;
-    private CircleCollider2D circleCollider;
-
+    [Header("Gravity")]
     public float FallingGravityMultiplier = 2.0f; // 낙하 중력 배율
     private float originalGravityScale = 1.0f; // 기본 중력
-
-    public Animator animator; // 애니메이션 컨트롤러
 
     // Start is called before the first frame update
     void Start()
@@ -167,6 +167,25 @@ public class Dynamic : MonoBehaviour
         else // 닿지 않았다면 (공중에 있다면)
         {
             IsGrounded = false;
+        }
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // 충돌한 게임 오브젝트의 태그가 "MovingPlatform"이라면
+        if (collision.gameObject.CompareTag("MovingPlatform"))
+        {
+            // 플레이어를 충돌한 플랫폼의 자식으로 만듭니다.
+            transform.SetParent(collision.transform);
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        // 충돌이 끝난 게임 오브젝트의 태그가 "MovingPlatform"이라면
+        if (collision.gameObject.CompareTag("MovingPlatform"))
+        {
+            // 플레이어의 부모-자식 관계를 해제합니다.
+            transform.SetParent(null);
         }
     }
 }

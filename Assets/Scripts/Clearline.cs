@@ -6,7 +6,7 @@ using UnityEngine;
 public class Clearline : MonoBehaviour
 {
     [SerializeField]
-    private TimelineControl tc;
+    private TimelineControl timelineControl;
 
     private bool isPlay = false;
 
@@ -14,10 +14,11 @@ public class Clearline : MonoBehaviour
     {
         if (collision.CompareTag("Player") && isPlay == false)
         {
-            if(tc != null)
+            if(timelineControl != null)
             {
                 isPlay = true;
-                tc.StageClear();
+                timelineControl.StageClear();
+                gameObject.SetActive(false);
             }
         }
     }

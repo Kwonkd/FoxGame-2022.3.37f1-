@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class PauseUI : MonoBehaviour
 {
     public GameObject pausePanel;
+    public GameObject gameOverUI;
     void OnEnable()
     {
         Debug.Log("스크립트 시작");
@@ -45,5 +46,11 @@ public class PauseUI : MonoBehaviour
             pausePanel.SetActive(false);
             SceneManager.LoadScene("MainScene");
         }
+    }
+    
+    public void GameOverUI()
+    {
+        Time.timeScale = 0;
+        gameOverUI.SetActive(true);
     }
 }

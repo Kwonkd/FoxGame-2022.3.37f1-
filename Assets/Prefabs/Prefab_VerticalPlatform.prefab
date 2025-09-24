@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5149584165505332806}
   m_Layer: 0
   m_Name: Prefab_VerticalPlatform
-  m_TagString: Untagged
+  m_TagString: MovingPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startDirection: 0
-  moveSpeed: 2
+  moveSpeed: 5
   moveDistance: 5
 --- !u!61 &5149584165505332806
 BoxCollider2D:
