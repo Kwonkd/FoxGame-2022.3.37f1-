@@ -5,10 +5,6 @@ using UnityEngine;
 public class Spikes : MonoBehaviour
 {
     public int damage = 1;
-    public float speed = 0.2f;
-    public float waitTime = 0.5f;
-    public float maxY;
-    public int spikStatus;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -8,6 +8,7 @@ public class Eagle : MonoBehaviour
     public GameObject objTarget;
     public float Speed = 2;
     public GameObject EaglePosition;
+    public int attackDamage = 1;
 
     public float curTime = -1;
     public float MaxTime = 2;
@@ -61,15 +62,7 @@ public class Eagle : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             objTarget = collision.gameObject;
-            //if (curTime > -1)
-            //{
-            //    curTime -= 0.5f * Time.deltaTime;
-            //}
         }
-        //else
-        //{
-        //    objTarget = EaglePosition; //충돌한 오브젝트가 플레이어가 아닐때 원위치 // 플레이어가 아닌 다른 오브젝트에 닿아야만 제자리로 돌아감 // 원하는 동작은 아님.
-        //}
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
@@ -80,9 +73,16 @@ public class Eagle : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        { 
-        Destroy(collision.gameObject);
+        if (collision.gameObject.tag == "Player")
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                PlayerStatus playerStatus = collision.gameObject.GetComponent<PlayerStatus>();
+                if (playerStatus != null)
+                {
+                    playerStatus.TakeDamage(attackDamage);
+                }
+            }
         }
     }
     void MoveDirectrion() //독수리가 바라보는 방향을 변경

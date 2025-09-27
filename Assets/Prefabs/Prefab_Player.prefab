@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c61b117e6ae4f74cbb682cfd869252b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: -975562766394354266}
   Speed: 10
   ColliderRadius: 0.6
   NormalSpeed: 10
@@ -113,7 +114,6 @@ MonoBehaviour:
   CrouchingColliderRadius: 0.4
   CrouchSpeed: 5
   FallingGravityMultiplier: 2
-  animator: {fileID: -975562766394354266}
 --- !u!58 &2709508016288150930
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -212,3 +212,7 @@ MonoBehaviour:
   maxHp: 5
   currentHp: 0
   numberOfCherry: 0
+  animator: {fileID: -975562766394354266}
+  isUse: 0
+  time: 1
+  spriteRenderer: {fileID: 7108699053527691932}
