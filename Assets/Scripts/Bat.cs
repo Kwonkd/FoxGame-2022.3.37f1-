@@ -23,7 +23,7 @@ public class Bat : MonoBehaviour
 
     void Update()
     {
-        MoveDirectrion();
+        MoveDirection();
         switch (state)
         {
             case BatState.Idle:
@@ -120,7 +120,7 @@ public class Bat : MonoBehaviour
             }
         }
     }
-    void MoveDirectrion()
+    void MoveDirection()
     {
         if (target != null)
         {

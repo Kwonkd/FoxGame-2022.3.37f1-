@@ -16,7 +16,7 @@ public class Eagle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveDirectrion();
+        MoveDirection();
 
         if (objTarget != null)
         {
@@ -85,7 +85,7 @@ public class Eagle : MonoBehaviour
             }
         }
     }
-    void MoveDirectrion() //독수리가 바라보는 방향을 변경
+    void MoveDirection() //독수리가 바라보는 방향을 변경
     {
         if (objTarget != null)
         {
