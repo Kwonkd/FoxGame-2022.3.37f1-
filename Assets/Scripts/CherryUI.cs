@@ -28,7 +28,7 @@ public class CherryUI : MonoBehaviour
                 }
             }
             //playerHp.text = ps.currentHp.ToString();
-            //cherryText.text = "x " + ps.numberOfCherry.ToString();
+            cherryText.text = "x " + ps.numberOfCherry.ToString();
         }
     }
 }

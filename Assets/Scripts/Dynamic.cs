@@ -18,12 +18,12 @@ public class Dynamic : MonoBehaviour
     [Header("Jump")]
     public float JumpPower; // 점프 시 가해지는 힘
     public bool IsGrounded; // 바닥에 닿아있는지 여부
-    public float Groundlinesize = 0.42f; // 바닥 감지용 Raycast 길이
+    public float Groundlinesize = 1.0f; // 바닥 감지용 Raycast 길이
     public int jumpCount = 0; // 점프 카운트 (최대 2단 점프)
 
     [Header("Crouch")]
     public bool IsCrouching; // 엎드리고 있는지 여부
-    public float LineSize = 0.15f; // 머리 위 장애물 감지용 Raycast 길이
+    public float LineSize = 0.3f; // 머리 위 장애물 감지용 Raycast 길이
     public float CrouchingColliderRadius = 0.4f; // 엎드렸을 때 콜라이더 반지름
     public float CrouchSpeed = 5f; // 엎드렸을 때 이동 속도
 
@@ -81,9 +81,9 @@ public class Dynamic : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && IsCrouching == false) // A키 입력, 엎드린 상태가 아닐 때
+        if (Input.GetKeyDown(KeyCode.Space) && IsCrouching == false) // 스페이스바 입력, 엎드린 상태가 아닐 때
         {
-            if (jumpCount < 2) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록 제한.
+            if (jumpCount < 1) //점프 카운트가 2개 미만이라면 // 2단 점프까지만 가능하도록 제한.
             {
                 jumpCount++; //점프 카운트 증가
                 rb.AddForce(Vector2.up * JumpPower);
@@ -136,7 +136,7 @@ public class Dynamic : MonoBehaviour
         {
             circleCollider.radius = CrouchingColliderRadius;
             Speed = CrouchSpeed;
-            //RaycastCrouching();
+            RaycastCrouching();
         }
         else
         {
@@ -148,14 +148,19 @@ public class Dynamic : MonoBehaviour
     bool RaycastCrouching()
     {
         // 캐릭터 위치에서 위 방향으로 Raycast 발사
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.up, LineSize, ~LayerMask.GetMask("Player"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.up, LineSize, ~LayerMask.GetMask("Ignore"));
+        //Debug.DrawRay(transform.position, Vector3.up * LineSize, Color.red);
+        //if (hit.collider != null)
+        //{
+        //    Debug.Log(hit.collider.name);
+        //}
         return hit.collider != null; // 장애물에 닿았는지 여부를 true/false로 반환
     }
     void RaycastGround()
     {
         // 캐릭터 발밑 위치에서 아래 방향으로 Raycast 발사
-        Vector3 rayStartPos = new Vector3(transform.position.x, transform.position.y - 0.45f, transform.position.z);
-        RaycastHit2D hit = Physics2D.Raycast(rayStartPos, Vector3.down, Groundlinesize, ~LayerMask.GetMask("Player"));
+        //Vector3 rayStartPos = new Vector3(transform.position.x, transform.position.y - 0.45f, transform.position.z);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector3.down, Groundlinesize, ~LayerMask.GetMask("Ignore"));
 
         if (hit) // Raycast에 무언가 닿았다면
         {

@@ -107,7 +107,7 @@ MonoBehaviour:
   NormalSpeed: 10
   JumpPower: 400
   IsGrounded: 0
-  Groundlinesize: 0.6
+  Groundlinesize: 1
   jumpCount: 0
   IsCrouching: 0
   LineSize: 0.2

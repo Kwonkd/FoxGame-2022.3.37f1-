@@ -94509,6 +94509,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Prefab_Player
       objectReference: {fileID: 0}
+    - target: {fileID: 3579288205024489471, guid: c9af8462f1e57ea468875ed175492567, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5360342621193929907, guid: c9af8462f1e57ea468875ed175492567, type: 3}
       propertyPath: m_LocalPosition.x
       value: 25.1
@@ -94560,6 +94564,10 @@ PrefabInstance:
     - target: {fileID: 7108699053527691932, guid: c9af8462f1e57ea468875ed175492567, type: 3}
       propertyPath: m_FlipY
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8647613101501841123, guid: c9af8462f1e57ea468875ed175492567, type: 3}
+      propertyPath: Groundlinesize
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -97245,7 +97253,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fffdcaa399904c4a85e533214ae2fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timelineControl: {fileID: 0}
+  timelineControl: {fileID: 1764256061}
 --- !u!1 &1004549759
 GameObject:
   m_ObjectHideFlags: 0
@@ -147021,7 +147029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1906945173}
   - component: {fileID: 1906945172}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cameraline
   m_TagString: Untagged
   m_Icon: {fileID: 0}

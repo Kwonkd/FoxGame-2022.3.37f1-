@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Main : MonoBehaviour
 {
+    public GameObject exitUI;
+    public bool toggleState = false;
     public Button[] stageButtons; // 스테이지 버튼들을 담을 배열
     public string[] stageSceneNames; // 버튼에 연결될 씬 이름 배열
 
@@ -48,12 +50,15 @@ public class Main : MonoBehaviour
             // 현재 선택된 버튼의 클릭 이벤트를 실행하는 것이 더 안정적
             stageButtons[currentIndex].onClick.Invoke();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ToggleExitUI();
+        }
     }
 
     private void ChangeSelection(int direction)
     {
-        // --- 문제의 for 루프 삭제 ---
-
         // 다음 인덱스 계산
         currentIndex += direction;
 
@@ -82,5 +87,22 @@ public class Main : MonoBehaviour
 
         Debug.Log(stageSceneNames[stageIndex] + " 씬을 로드합니다.");
         SceneManager.LoadScene(stageSceneNames[stageIndex]);
+    }
+
+    public void OnClickCancel ()
+    {
+        exitUI.SetActive(false);
+    }
+    public void OnClickExit()
+    {
+        Application.Quit();
+    }
+    void ToggleExitUI()
+    {
+        toggleState = !toggleState;
+        if (exitUI != null)
+        {
+            exitUI.SetActive(toggleState); // 상태에 따라 오브젝트 활성화/비활성화
+        }
     }
 }

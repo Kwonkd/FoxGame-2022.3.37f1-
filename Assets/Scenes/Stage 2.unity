@@ -442,7 +442,7 @@ GameObject:
   m_Component:
   - component: {fileID: 53480447}
   - component: {fileID: 53480448}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cameraline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -662,6 +662,10 @@ PrefabInstance:
     - target: {fileID: 3579288205024489471, guid: c9af8462f1e57ea468875ed175492567, type: 3}
       propertyPath: m_Name
       value: Prefab_Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 3579288205024489471, guid: c9af8462f1e57ea468875ed175492567, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5360342621193929907, guid: c9af8462f1e57ea468875ed175492567, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24274,7 +24278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fffdcaa399904c4a85e533214ae2fa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timelineControl: {fileID: 0}
+  timelineControl: {fileID: 1905334814}
 --- !u!61 &1529467038
 BoxCollider2D:
   m_ObjectHideFlags: 0

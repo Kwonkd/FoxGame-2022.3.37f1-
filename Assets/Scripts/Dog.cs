@@ -104,9 +104,6 @@ public class Dog : MonoBehaviour
         // X 좌표가 이전 프레임과 다르면 (변화가 감지되면)
         if (currentXPosition != previousXPosition)
         {
-            // 변화가 있을 때 실행할 로직
-            Debug.Log("X 좌표가 변경되었습니다! 현재 X: " + currentXPosition);
-
             // X 좌표가 증가했는지 감소했는지 확인
             if (currentXPosition > previousXPosition)
             {
